@@ -1,3 +1,3 @@
-(lang dune 1.7)
+(lang dune 2.0)
+
 (name data-encoding)
-(using fmt 1.2)
