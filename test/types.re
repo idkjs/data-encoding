@@ -250,10 +250,10 @@ module Alcotest = {
 
   let bytes =
     testable(
-      Fmt.of_to_string(s =>
+      Fmt.of_to_string(s =>{
         let `Hex(s) = Hex.of_bytes(s);
         s;
-      ),
+     } ),
       Bytes.equal,
     );
 

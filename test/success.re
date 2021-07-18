@@ -36,28 +36,28 @@ open Helpers;
 open Types;
 
 let json = (ty, encoding, value, ()) =>
-  no_exception(() =>
+  no_exception(() =>{
     let json = Json.construct(encoding, value);
     let result = Json.destruct(encoding, json);
     Alcotest.check(ty, "json", value, result);
-  );
+  });
 
 let bson = (ty, encoding, value, ()) =>
-  no_exception(() =>
+  no_exception(() =>{
     let json = Bson.construct(encoding, value);
     let result = Bson.destruct(encoding, json);
     Alcotest.check(ty, "bson", value, result);
-  );
+  });
 
 let binary = (ty, encoding, value, ()) =>
-  no_exception(() =>
+  no_exception(() =>{
     let bytes = Binary.to_bytes_exn(encoding, value);
     let result = Binary.of_bytes_exn(encoding, bytes);
     Alcotest.check(ty, "binary", value, result);
-  );
+ } );
 
 let stream = (ty, encoding, value, ()) =>
-  no_exception(() =>
+  no_exception(() =>{
     let bytes = Binary.to_bytes_exn(encoding, value);
     let len_data = Bytes.length(bytes);
     for (sz in 1 to max(1, len_data)) {
@@ -79,7 +79,7 @@ let stream = (ty, encoding, value, ()) =>
         )
       };
     };
-  );
+ } );
 
 let all = (name, ty, encoding, value) => {
   let stream_encoding =

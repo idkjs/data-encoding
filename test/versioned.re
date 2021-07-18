@@ -272,12 +272,12 @@ let test_n_encapsulated_versions = () => {
     With_version.(encoding(~name) @@ first_version(version_0));
   let value_0 = ("v0", "k0");
   let json_0 = Json.construct(versioned_0, value_0);
-  Helpers.no_exception(() =>
+  Helpers.no_exception(() =>{
     let result = Json.destruct(versioned_0, json_0);
     if (result != value_0) {
       Alcotest.failf("value-0");
     };
-  );
+  });
   module Ex = {
     type v0 = (string, string);
 
@@ -295,28 +295,28 @@ let test_n_encapsulated_versions = () => {
     let encoding = With_version.(encoding(~name, versioned_n));
     let example_n = ("val4" ++ new_tag, example);
     let json_example_n = Json.construct(encoding, example_n);
-    Helpers.no_exception(() =>
+    Helpers.no_exception(() =>{
       let result = Json.destruct(encoding, json_example_n);
       if (result != example_n) {
         Alcotest.failf("value-%d", index);
       };
-    );
+    });
     let json_example_p =
       Json.construct(With_version.(encoding(~name, versioned)), example);
 
-    Helpers.no_exception(() =>
+    Helpers.no_exception(() =>{
       let result = Json.destruct(encoding, json_example_p);
       if (result != upgrade(example)) {
         Alcotest.failf("value-%d-previous-encoding", index);
       };
-    );
+    });
     let next_upgrade = x => upgrade(from_v0(x));
-    Helpers.no_exception(() =>
+    Helpers.no_exception(() =>{
       let result = Json.destruct(encoding, json_0);
       if (result != next_upgrade(value_0)) {
         Alcotest.failf("value-%d-from-v0-encoding", index);
       };
-    );
+    });
     Format.eprintf(
       "json_example_%d:@ %a\n%!",
       index,
